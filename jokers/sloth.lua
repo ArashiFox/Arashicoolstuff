@@ -17,8 +17,12 @@ SMODS.Joker{ --Sloth
         }
     },
     pos = {
-        x = 4,
+        x = 9,
         y = 1
+    },
+    display_size = {
+        w = 71 * 1, 
+        h = 95 * 1
     },
     cost = 6,
     rarity = 3,

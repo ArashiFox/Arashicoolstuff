@@ -15,8 +15,12 @@ SMODS.Joker{ --Empty Bottle
         }
     },
     pos = {
-        x = 3,
+        x = 5,
         y = 0
+    },
+    display_size = {
+        w = 71 * 1, 
+        h = 95 * 1
     },
     cost = 1,
     rarity = 1,
@@ -26,6 +30,7 @@ SMODS.Joker{ --Empty Bottle
     unlocked = true,
     discovered = true,
     atlas = 'CustomJokers',
+    pools = { ["arashi_food"] = true },
     in_pool = function(self, args)
           return (
           not args 

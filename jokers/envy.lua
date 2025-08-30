@@ -23,8 +23,12 @@ SMODS.Joker{ --Envy
         }
     },
     pos = {
-        x = 4,
+        x = 6,
         y = 0
+    },
+    display_size = {
+        w = 71 * 1, 
+        h = 95 * 1
     },
     cost = 6,
     rarity = 3,

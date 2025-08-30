@@ -17,8 +17,12 @@ SMODS.Joker{ --Water bottle
         }
     },
     pos = {
-        x = 9,
-        y = 1
+        x = 4,
+        y = 2
+    },
+    display_size = {
+        w = 71 * 1, 
+        h = 95 * 1
     },
     cost = 4,
     rarity = 1,
@@ -28,6 +32,7 @@ SMODS.Joker{ --Water bottle
     unlocked = true,
     discovered = true,
     atlas = 'CustomJokers',
+    pools = { ["arashi_food"] = true },
 
     loc_vars = function(self, info_queue, card)
         return {vars = {card.ability.extra.chips}}

@@ -21,7 +21,13 @@ SMODS.Consumable {
                   delay = 0.4,
                   func = function()
                       play_sound('timpani')
-                      SMODS.add_card({ set = 'Joker', key = 'j_hanging_chad' })
+                      if #G.jokers.cards + G.GAME.joker_buffer < G.jokers.config.card_limit then
+                          G.GAME.joker_buffer = G.GAME.joker_buffer + 1
+                      local new_joker = SMODS.add_card({ set = 'Joker', key = 'j_hanging_chad' })
+                      if new_joker then
+                      end
+                          G.GAME.joker_buffer = 0
+                      end
                       used_card:juice_up(0.3, 0.5)
                       return true
                   end
@@ -32,7 +38,13 @@ SMODS.Consumable {
                   delay = 0.4,
                   func = function()
                       play_sound('timpani')
-                      SMODS.add_card({ set = 'Joker', key = 'j_photograph' })
+                      if #G.jokers.cards + G.GAME.joker_buffer < G.jokers.config.card_limit then
+                          G.GAME.joker_buffer = G.GAME.joker_buffer + 1
+                      local new_joker = SMODS.add_card({ set = 'Joker', key = 'j_photograph' })
+                      if new_joker then
+                      end
+                          G.GAME.joker_buffer = 0
+                      end
                       used_card:juice_up(0.3, 0.5)
                       return true
                   end
@@ -43,7 +55,13 @@ SMODS.Consumable {
                   delay = 0.4,
                   func = function()
                       play_sound('timpani')
-                      SMODS.add_card({ set = 'Joker', key = 'j_arashi_gratefuljoker' })
+                      if #G.jokers.cards + G.GAME.joker_buffer < G.jokers.config.card_limit then
+                          G.GAME.joker_buffer = G.GAME.joker_buffer + 1
+                      local new_joker = SMODS.add_card({ set = 'Joker', key = 'j_arashi_gratefuljoker' })
+                      if new_joker then
+                      end
+                          G.GAME.joker_buffer = 0
+                      end
                       used_card:juice_up(0.3, 0.5)
                       return true
                   end

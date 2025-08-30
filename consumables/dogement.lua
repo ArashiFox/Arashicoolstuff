@@ -1,14 +1,14 @@
 SMODS.Consumable {
-    key = 'fuckinginsane',
-    set = 'Spectral',
+    key = 'dogement',
+    set = 'Tarot',
     pos = { x = 0, y = 0 },
     loc_txt = {
-        name = 'Fucking insane',
+        name = 'Dogement',
         text = {
-        [1] = 'Creates a fucking insane joker'
+        [1] = 'Creates a {C:attention}pet joker{}'
     }
     },
-    cost = 3,
+    cost = 5,
     unlocked = true,
     discovered = true,
     hidden = false,
@@ -21,7 +21,13 @@ SMODS.Consumable {
                   delay = 0.4,
                   func = function()
                       play_sound('timpani')
-                      SMODS.add_card({ set = 'Joker', rarity = 'arashi_fucking_insane' })
+                      if #G.jokers.cards + G.GAME.joker_buffer < G.jokers.config.card_limit then
+                          G.GAME.joker_buffer = G.GAME.joker_buffer + 1
+                      local new_joker = SMODS.add_card({ set = 'arashi_pet' })
+                      if new_joker then
+                      end
+                          G.GAME.joker_buffer = 0
+                      end
                       used_card:juice_up(0.3, 0.5)
                       return true
                   end

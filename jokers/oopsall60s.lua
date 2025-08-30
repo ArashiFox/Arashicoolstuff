@@ -1,29 +1,31 @@
-SMODS.Joker{ --Deer
-    key = "deer",
+SMODS.Joker{ --Oops! All 60s
+    key = "oopsall60s",
     config = {
         extra = {
-            mult = 10
+            set_probability = 1,
+            denominator = 0
         }
     },
     loc_txt = {
-        ['name'] = 'Deer',
+        ['name'] = 'Oops! All 60s',
         ['text'] = {
-            [1] = '{C:red}+10{} Mult'
+            [1] = 'All {C:attention}listed {}{C:green}probabilities{} are',
+            [2] = '{C:attention}guaranteed{}'
         },
         ['unlock'] = {
-            [1] = ''
+            [1] = 'Unlocked by default.'
         }
     },
     pos = {
-        x = 3,
-        y = 0
+        x = 8,
+        y = 1
     },
     display_size = {
         w = 71 * 1, 
         h = 95 * 1
     },
-    cost = 4,
-    rarity = 1,
+    cost = 20,
+    rarity = 4,
     blueprint_compat = true,
     eternal_compat = true,
     perishable_compat = true,
@@ -40,10 +42,13 @@ SMODS.Joker{ --Deer
       end,
 
     calculate = function(self, card, context)
-        if context.cardarea == G.jokers and context.joker_main  then
-                return {
-                    mult = card.ability.extra.mult
-                }
+        if context.fix_probability  then
+        local numerator, denominator = context.numerator, context.denominator
+                denominator = card.ability.extra.set_probability
+      return {
+        numerator = numerator, 
+        denominator = denominator
+      }
         end
     end
 }

@@ -15,8 +15,12 @@ SMODS.Joker{ --Super gilb(200k iq)
         }
     },
     pos = {
-        x = 5,
-        y = 1
+        x = 0,
+        y = 2
+    },
+    display_size = {
+        w = 71 * 1, 
+        h = 95 * 1
     },
     cost = 20,
     rarity = 4,

@@ -16,12 +16,16 @@ SMODS.Joker{ --Logo
         }
     },
     pos = {
-        x = 1,
+        x = 6,
         y = 1
+    },
+    display_size = {
+        w = 71 * 1, 
+        h = 95 * 1
     },
     cost = 15,
     rarity = 3,
-    blueprint_compat = false,
+    blueprint_compat = true,
     eternal_compat = true,
     perishable_compat = true,
     unlocked = true,

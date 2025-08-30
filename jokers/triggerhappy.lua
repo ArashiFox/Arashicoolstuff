@@ -16,8 +16,12 @@ SMODS.Joker{ --Trigger happy
         }
     },
     pos = {
-        x = 7,
-        y = 1
+        x = 2,
+        y = 2
+    },
+    display_size = {
+        w = 71 * 1, 
+        h = 95 * 1
     },
     cost = 5,
     rarity = 2,

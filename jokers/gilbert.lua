@@ -19,8 +19,12 @@ SMODS.Joker{ --Gilbert(170 iq)
         }
     },
     pos = {
-        x = 6,
+        x = 8,
         y = 0
+    },
+    display_size = {
+        w = 71 * 1, 
+        h = 95 * 1
     },
     cost = 5,
     rarity = 2,

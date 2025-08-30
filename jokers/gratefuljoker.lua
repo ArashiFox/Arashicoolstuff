@@ -19,8 +19,12 @@ SMODS.Joker{ --Grateful Joker
         }
     },
     pos = {
-        x = 0,
+        x = 1,
         y = 1
+    },
+    display_size = {
+        w = 71 * 1, 
+        h = 95 * 1
     },
     cost = 10,
     rarity = 3,

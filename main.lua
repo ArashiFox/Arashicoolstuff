@@ -70,12 +70,31 @@ local function load_seals_folder()
     end
 end
 
-local function load_rarities_file()
-    local mod_path = SMODS.current_mod.path
-    assert(SMODS.load_file("rarities.lua"))()
-end
-
-load_rarities_file()
 load_jokers_folder()
 load_consumables_folder()
 load_seals_folder()
+SMODS.ObjectType({
+    key = "arashi_food",
+    cards = {
+        ["j_gros_michel"] = true,
+        ["j_egg"] = true,
+        ["j_ice_cream"] = true,
+        ["j_cavendish"] = true,
+        ["j_turtle_bean"] = true,
+        ["j_diet_cola"] = true,
+        ["j_popcorn"] = true,
+        ["j_ramen"] = true,
+        ["j_selzer"] = true,
+        ["j_arashi_emptybottle"] = true,
+        ["j_arashi_waterbottle"] = true
+    },
+})
+
+SMODS.ObjectType({
+    key = "arashi_pet",
+    cards = {
+        ["j_arashi_bossan"] = true,
+        ["j_arashi_jussi"] = true,
+        ["j_arashi_leo"] = true
+    },
+})

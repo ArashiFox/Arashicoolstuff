@@ -1,26 +1,24 @@
-SMODS.Joker{ --Gluttony
-    key = "gluttony",
+SMODS.Joker{ --Jussi
+    key = "jussi",
     config = {
         extra = {
             xmult = 1
         }
     },
     loc_txt = {
-        ['name'] = 'Gluttony',
+        ['name'] = 'Jussi',
         ['text'] = {
-            [1] = 'Always {C:legendary}Eternal{}',
-            [2] = 'Gains {X:red,C:white}X0.2{} Mult when',
-            [3] = 'a card is destroyed',
-            [4] = 'Idea by {X:legendary,C:white}Ridry{}',
-            [5] = '(Currently {X:red,C:white}X#1#{} Mult)'
+            [1] = 'Gains {X:red,C:white}X0.5{} Mult when a {C:attention}card{}',
+            [2] = 'is {C:attention}bought{}',
+            [3] = '{C:inactive}(Currently {X:red,C:white}X#1#{} {C:inactive}Mult){}'
         },
         ['unlock'] = {
             [1] = ''
         }
     },
     pos = {
-        x = 9,
-        y = 0
+        x = 3,
+        y = 1
     },
     display_size = {
         w = 71 * 1, 
@@ -34,20 +32,17 @@ SMODS.Joker{ --Gluttony
     unlocked = true,
     discovered = true,
     atlas = 'CustomJokers',
+    pools = { ["arashi_pet"] = true },
 
     loc_vars = function(self, info_queue, card)
         return {vars = {card.ability.extra.xmult}}
     end,
 
-    set_ability = function(self, card, initial)
-        card:set_eternal(true)
-    end,
-
     calculate = function(self, card, context)
-        if context.remove_playing_cards  then
+        if context.buying_card  then
                 return {
                     func = function()
-                    card.ability.extra.xmult = (card.ability.extra.xmult) + 0.2
+                    card.ability.extra.xmult = (card.ability.extra.xmult) + 0.5
                     return true
                 end
                 }

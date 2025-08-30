@@ -16,8 +16,12 @@ SMODS.Joker{ --Wrath
         }
     },
     pos = {
-        x = 0,
+        x = 5,
         y = 2
+    },
+    display_size = {
+        w = 71 * 1, 
+        h = 95 * 1
     },
     cost = 6,
     rarity = 3,
