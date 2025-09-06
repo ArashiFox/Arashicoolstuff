@@ -18,7 +18,7 @@ SMODS.Joker{ --Oops! All 1s
         }
     },
     pos = {
-        x = 7,
+        x = 9,
         y = 1
     },
     display_size = {

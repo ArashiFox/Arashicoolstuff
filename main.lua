@@ -85,7 +85,9 @@ SMODS.ObjectType({
         ["j_popcorn"] = true,
         ["j_ramen"] = true,
         ["j_selzer"] = true,
+        ["j_arashi_chocolatemilk"] = true,
         ["j_arashi_emptybottle"] = true,
+        ["j_arashi_sad"] = true,
         ["j_arashi_waterbottle"] = true
     },
 })

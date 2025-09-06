@@ -15,7 +15,7 @@ SMODS.Joker{ --Empty Bottle
         }
     },
     pos = {
-        x = 5,
+        x = 7,
         y = 0
     },
     display_size = {

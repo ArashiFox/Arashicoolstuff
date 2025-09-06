@@ -2,8 +2,7 @@ SMODS.Joker{ --Gilbert(170 iq)
     key = "gilbert",
     config = {
         extra = {
-            planets = 0,
-            Planet = 0
+            planets = 0
         }
     },
     loc_txt = {
@@ -19,8 +18,8 @@ SMODS.Joker{ --Gilbert(170 iq)
         }
     },
     pos = {
-        x = 8,
-        y = 0
+        x = 0,
+        y = 1
     },
     display_size = {
         w = 71 * 1, 

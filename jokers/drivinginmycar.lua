@@ -23,7 +23,7 @@ SMODS.Joker{ --Driving in my car
         }
     },
     pos = {
-        x = 4,
+        x = 6,
         y = 0
     },
     display_size = {

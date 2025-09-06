@@ -8,7 +8,7 @@ SMODS.Consumable {
         [1] = 'Creates a {C:attention}pet joker{}'
     }
     },
-    cost = 5,
+    cost = 3,
     unlocked = true,
     discovered = true,
     hidden = false,

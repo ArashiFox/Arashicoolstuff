@@ -16,8 +16,8 @@ SMODS.Joker{ --Wrath
         }
     },
     pos = {
-        x = 5,
-        y = 2
+        x = 1,
+        y = 3
     },
     display_size = {
         w = 71 * 1, 

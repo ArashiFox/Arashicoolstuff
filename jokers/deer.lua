@@ -15,7 +15,7 @@ SMODS.Joker{ --Deer
         }
     },
     pos = {
-        x = 3,
+        x = 5,
         y = 0
     },
     display_size = {

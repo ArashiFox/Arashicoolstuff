@@ -23,7 +23,7 @@ SMODS.Joker{ --Envy
         }
     },
     pos = {
-        x = 6,
+        x = 8,
         y = 0
     },
     display_size = {
@@ -48,7 +48,7 @@ SMODS.Joker{ --Envy
     end,
 
     calculate = function(self, card, context)
-        if context.individual and context.cardarea == G.play  then
+        if context.individual and context.cardarea == G.play  and not context.blueprint then
             if context.other_card.edition and context.other_card.edition.key == "e_foil" then
                 context.other_card:set_edition(nil)
                 card.ability.extra.chips = (card.ability.extra.chips) + 50

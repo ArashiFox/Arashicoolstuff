@@ -1,17 +1,18 @@
-SMODS.Joker{ --Grocery Store
-    key = "grocerystore",
+SMODS.Joker{ --Chocolate milk
+    key = "chocolatemilk",
     config = {
         extra = {
-            food = 0,
-            respect = 0
+            xmult = 6,
+            Xmult = 6,
+            ignore = 0
         }
     },
     loc_txt = {
-        ['name'] = 'Grocery Store',
+        ['name'] = 'Chocolate milk',
         ['text'] = {
-            [1] = 'Sell this card to',
-            [2] = 'create 2 {C:edition}negative{} food jokers{}',
-            [3] = '(Idea by {X:money,C:white}Mozzarelladuck{})'
+            [1] = '{X:red,C:white}X6{} Mult one round,',
+            [2] = 'then {X:red,C:white}X0.3{} Mult the next.',
+            [3] = '{C:attention}Destroyed{} after second round'
         },
         ['unlock'] = {
             [1] = 'Unlocked by default.'
@@ -19,7 +20,7 @@ SMODS.Joker{ --Grocery Store
     },
     pos = {
         x = 4,
-        y = 1
+        y = 0
     },
     display_size = {
         w = 71 * 1, 
@@ -33,17 +34,23 @@ SMODS.Joker{ --Grocery Store
     unlocked = true,
     discovered = true,
     atlas = 'CustomJokers',
+    pools = { ["arashi_food"] = true },
 
     calculate = function(self, card, context)
-        if context.selling_self  then
+        if context.cardarea == G.jokers and context.joker_main  then
+                return {
+                    Xmult = card.ability.extra.Xmult
+                }
+        end
+        if context.end_of_round and context.game_over == false and context.main_eval  then
                 return {
                     func = function()
             local created_joker = true
             G.E_MANAGER:add_event(Event({
                 func = function()
-                    local joker_card = SMODS.add_card({ set = 'arashi_food' })
+                    local joker_card = SMODS.add_card({ set = 'Joker', key = 'j_arashi_sad' })
                     if joker_card then
-                        joker_card:set_edition("e_negative", true)
+                        
                         
                     end
                     
@@ -58,25 +65,11 @@ SMODS.Joker{ --Grocery Store
         end,
                     extra = {
                         func = function()
-            local created_joker = true
-            G.E_MANAGER:add_event(Event({
-                func = function()
-                    local joker_card = SMODS.add_card({ set = 'arashi_food' })
-                    if joker_card then
-                        joker_card:set_edition("e_negative", true)
-                        
-                    end
-                    
-                    return true
-                end
-            }))
-            
-            if created_joker then
-                card_eval_status_text(context.blueprint_card or card, 'extra', nil, nil, nil, {message = localize('k_plus_joker'), colour = G.C.BLUE})
-            end
-            return true
-        end,
-                        colour = G.C.BLUE
+                card:start_dissolve()
+                return true
+            end,
+                            message = "Destroyed!",
+                        colour = G.C.RED
                         }
                 }
         end

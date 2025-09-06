@@ -51,7 +51,7 @@ SMODS.Seal {
         end
         if context.main_scoring and context.cardarea == G.play then
             card.should_destroy = false
-            if SMODS.pseudorandom_probability(card, 'group_0_eb41a39a', 1, card.ability.seal.extra.odds, 'm_arashi_gilbertseal', false) then
+            if SMODS.pseudorandom_probability(card, 'group_0_eb41a39a', 1, card.ability.seal.extra.odds, 'm_arashi_gilbertseal') then
                 card.should_destroy = true
             end
         end

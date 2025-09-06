@@ -17,7 +17,7 @@ SMODS.Joker{ --Water bottle
         }
     },
     pos = {
-        x = 4,
+        x = 9,
         y = 2
     },
     display_size = {

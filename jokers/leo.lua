@@ -15,7 +15,7 @@ SMODS.Joker{ --Leo
         }
     },
     pos = {
-        x = 5,
+        x = 7,
         y = 1
     },
     display_size = {

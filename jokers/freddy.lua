@@ -20,7 +20,7 @@ SMODS.Joker{ --Freddy fazbear
         }
     },
     pos = {
-        x = 7,
+        x = 9,
         y = 0
     },
     display_size = {

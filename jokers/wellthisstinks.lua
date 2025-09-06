@@ -1,23 +1,23 @@
-SMODS.Joker{ --The daughter of Grager
-    key = "hennie",
+SMODS.Joker{ --Well this stinks
+    key = "wellthisstinks",
     config = {
         extra = {
-            currentante = 0,
-            Xmult = 3.5
+            Xmult = 5
         }
     },
     loc_txt = {
-        ['name'] = 'The daughter of Grager',
+        ['name'] = 'Well this stinks',
         ['text'] = {
-            [1] = '{X:red,C:white}X3.5{} Mult if ante is below 8'
+            [1] = '{X:red,C:white}X5{} Mult',
+            [2] = 'Is destroyed when a playing card is destroyed'
         },
         ['unlock'] = {
-            [1] = ''
+            [1] = 'Unlocked by default.'
         }
     },
     pos = {
-        x = 5,
-        y = 2
+        x = 0,
+        y = 3
     },
     display_size = {
         w = 71 * 1, 
@@ -34,11 +34,18 @@ SMODS.Joker{ --The daughter of Grager
 
     calculate = function(self, card, context)
         if context.cardarea == G.jokers and context.joker_main  then
-            if 8 > G.GAME.round_resets.ante then
                 return {
                     Xmult = card.ability.extra.Xmult
                 }
-            end
+        end
+        if context.remove_playing_cards  then
+                return {
+                    func = function()
+                card:start_dissolve()
+                return true
+            end,
+                    message = "Well, this stinks. (cries)"
+                }
         end
     end
 }
