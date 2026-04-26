@@ -1,9 +1,10 @@
+
 SMODS.Joker{ --The daughter of Grager
     key = "hennie",
     config = {
         extra = {
             currentante = 0,
-            Xmult = 3.5
+            xmult0 = 3.5
         }
     },
     loc_txt = {
@@ -31,12 +32,17 @@ SMODS.Joker{ --The daughter of Grager
     unlocked = true,
     discovered = true,
     atlas = 'CustomJokers',
-
+    
+    loc_vars = function(self, info_queue, card)
+        
+        return {vars = {(G.GAME.round_resets.ante or 0)}}
+    end,
+    
     calculate = function(self, card, context)
         if context.cardarea == G.jokers and context.joker_main  then
-            if 8 > G.GAME.round_resets.ante then
+            if to_big(8) > to_big(G.GAME.round_resets.ante) then
                 return {
-                    Xmult = card.ability.extra.Xmult
+                    Xmult = 3.5
                 }
             end
         end

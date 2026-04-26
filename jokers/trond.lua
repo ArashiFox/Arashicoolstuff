@@ -1,9 +1,10 @@
+
 SMODS.Joker{ --Trond
     key = "trond",
     config = {
         extra = {
-            dollars = 5,
-            emult = 1.3
+            dollars0 = 5,
+            emult0 = 1.3
         }
     },
     loc_txt = {
@@ -34,23 +35,31 @@ SMODS.Joker{ --Trond
     unlocked = true,
     discovered = true,
     atlas = 'CustomJokers',
-
+    
     calculate = function(self, card, context)
         if context.cardarea == G.jokers and context.joker_main  then
             if context.scoring_name == "Three of a Kind" then
                 return {
-                    dollars = card.ability.extra.dollars
+                    
+                    func = function()
+                        
+                        local current_dollars = G.GAME.dollars
+                        local target_dollars = G.GAME.dollars + 5
+                        local dollar_value = target_dollars - current_dollars
+                        ease_dollars(dollar_value)
+                        card_eval_status_text(context.blueprint_card or card, 'extra', nil, nil, nil, {message = "+"..tostring(5), colour = G.C.MONEY})
+                        return true
+                    end
                 }
             elseif (function()
-      for i = 1, #G.jokers.cards do
-          if G.jokers.cards[i].config.center.key == "j_arashi_freddy" then
-              return true
-          end
-      end
-      return false
-  end)() then
+                for i, v in pairs(G.jokers.cards) do
+                    if v.config.center.key == "j_arashi_freddy" then 
+                        return true
+                    end
+                end
+            end)() then
                 return {
-                    e_mult = card.ability.extra.emult,
+                    e_mult = 1.3,
                     message = "Smooch!"
                 }
             end

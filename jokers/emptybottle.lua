@@ -1,3 +1,4 @@
+
 SMODS.Joker{ --Empty Bottle
     key = "emptybottle",
     config = {
@@ -15,7 +16,7 @@ SMODS.Joker{ --Empty Bottle
         }
     },
     pos = {
-        x = 7,
+        x = 8,
         y = 0
     },
     display_size = {
@@ -32,14 +33,14 @@ SMODS.Joker{ --Empty Bottle
     atlas = 'CustomJokers',
     pools = { ["arashi_food"] = true },
     in_pool = function(self, args)
-          return (
-          not args 
-          or args.source ~= 'sho' 
-          or args.source == 'buf' or args.source == 'jud' or args.source == 'rif' or args.source == 'rta' or args.source == 'sou' or args.source == 'uta' or args.source == 'wra'
-          )
-          and true
-      end,
-
+        return (
+            not args 
+            or args.source ~= 'sho' 
+            or args.source == 'buf' or args.source == 'jud' or args.source == 'rif' or args.source == 'rta' or args.source == 'sou' or args.source == 'uta' or args.source == 'wra'
+        )
+        and true
+    end,
+    
     set_ability = function(self, card, initial)
         card:set_eternal(true)
     end

@@ -1,3 +1,4 @@
+
 SMODS.Joker{ --Philosophic Joker
     key = "philosophicjoker",
     config = {
@@ -32,29 +33,39 @@ SMODS.Joker{ --Philosophic Joker
     unlocked = true,
     discovered = true,
     atlas = 'CustomJokers',
-
+    
+    loc_vars = function(self, info_queue, card)
+        
+        local new_numerator, new_denominator = SMODS.get_probability_vars(card, 1, card.ability.extra.odds, 'j_arashi_philosophicjoker') 
+        return {vars = {new_numerator, new_denominator}}
+    end,
+    
     calculate = function(self, card, context)
         if context.using_consumeable  then
             if context.consumeable and context.consumeable.ability.set == 'Tarot' then
                 if SMODS.pseudorandom_probability(card, 'group_0_efda51ae', 1, card.ability.extra.odds, 'j_arashi_philosophicjoker', false) then
-              SMODS.calculate_effect({func = function()local created_consumable = false
-                if #G.consumeables.cards + G.GAME.consumeable_buffer < G.consumeables.config.card_limit then
-                    created_consumable = true
-                    G.GAME.consumeable_buffer = G.GAME.consumeable_buffer + 1
-                    G.E_MANAGER:add_event(Event({
-                        func = function()
-                            SMODS.add_card{set = 'Spectral', key = nil, key_append = 'joker_forge_spectral'}
-                            G.GAME.consumeable_buffer = 0
-                            return true
+                    SMODS.calculate_effect({func = function()
+                        
+                        for i = 1, math.min(1, G.consumeables.config.card_limit - #G.consumeables.cards) do
+                            G.E_MANAGER:add_event(Event({
+                                trigger = 'after',
+                                delay = 0.4,
+                                func = function()
+                                    play_sound('timpani')
+                                    SMODS.add_card({ set = 'Spectral', })                            
+                                    card:juice_up(0.3, 0.5)
+                                    return true
+                                end
+                            }))
                         end
-                    }))
+                        delay(0.6)
+                        
+                        if created_consumable then
+                            card_eval_status_text(context.blueprint_card or card, 'extra', nil, nil, nil, {message = localize('k_plus_spectral'), colour = G.C.SECONDARY_SET.Spectral})
+                        end
+                        return true
+                    end}, card)
                 end
-                    if created_consumable then
-                        card_eval_status_text(context.blueprint_card or card, 'extra', nil, nil, nil, {message = localize('k_plus_spectral'), colour = G.C.SECONDARY_SET.Spectral})
-                    end
-                    return true
-                end}, card)
-          end
             end
         end
     end

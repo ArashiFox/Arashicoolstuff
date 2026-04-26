@@ -1,24 +1,23 @@
 
-SMODS.Joker{ --Oops! All 60s
-    key = "oopsall60s",
+SMODS.Joker{ --Loyloy
+    key = "loyloy",
     config = {
         extra = {
-            set_probability0 = 1
         }
     },
     loc_txt = {
-        ['name'] = 'Oops! All 60s',
+        ['name'] = 'Loyloy',
         ['text'] = {
-            [1] = 'All {C:attention}listed {}{C:green}probabilities{} are',
-            [2] = '{C:attention}guaranteed{}'
+            [1] = 'Creates {C:attention}2{} {C:blue}Double{} {C:red}Tags{}',
+            [2] = 'when {C:attention}blind{} is selected'
         },
         ['unlock'] = {
             [1] = 'Unlocked by default.'
         }
     },
     pos = {
-        x = 0,
-        y = 2
+        x = 3,
+        y = 3
     },
     display_size = {
         w = 71 * 1, 
@@ -32,6 +31,10 @@ SMODS.Joker{ --Oops! All 60s
     unlocked = true,
     discovered = true,
     atlas = 'CustomJokers',
+    soul_pos = {
+        x = 4,
+        y = 3
+    },
     in_pool = function(self, args)
         return (
             not args 
@@ -39,16 +42,5 @@ SMODS.Joker{ --Oops! All 60s
             or args.source == 'buf' or args.source == 'jud' or args.source == 'rif' or args.source == 'rta' or args.source == 'sou' or args.source == 'uta' or args.source == 'wra'
         )
         and true
-    end,
-    
-    calculate = function(self, card, context)
-        if context.fix_probability  then
-            local numerator, denominator = context.numerator, context.denominator
-            denominator = 1
-            return {
-                numerator = numerator, 
-                denominator = denominator
-            }
-        end
     end
 }

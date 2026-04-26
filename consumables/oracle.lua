@@ -1,13 +1,14 @@
+
 SMODS.Consumable {
     key = 'oracle',
     set = 'Spectral',
-    pos = { x = 2, y = 0 },
+    pos = { x = 3, y = 0 },
     loc_txt = {
         name = 'Oracle',
         text = {
-        [1] = 'Applies an {C:attention}Orange seal{}',
-        [2] = 'to one selected card'
-    }
+            [1] = 'Applies an {C:attention}Orange seal{}',
+            [2] = 'to one selected card'
+        }
     },
     cost = 4,
     unlocked = true,
@@ -17,7 +18,22 @@ SMODS.Consumable {
     atlas = 'CustomConsumables',
     use = function(self, card, area, copier)
         local used_card = copier or card
-        if #G.hand.highlighted == 1 then
+        if to_big(#G.hand.highlighted) == to_big(1) then
+            local affected_cards = {}
+            local temp_hand = {}
+            
+        for _, playing_card in ipairs(G.hand.cards) do temp_hand[#temp_hand + 1] = playing_card end
+            table.sort(temp_hand,
+                function(a, b)
+                    return not a.playing_card or not b.playing_card or a.playing_card < b.playing_card
+                end
+            )
+            
+            pseudoshuffle(temp_hand, 12345)
+            
+            for i = 1, math.min(2, #temp_hand) do 
+                affected_cards[#affected_cards + 1] = temp_hand[i] 
+            end
             G.E_MANAGER:add_event(Event({
                 trigger = 'after',
                 delay = 0.4,
@@ -27,39 +43,39 @@ SMODS.Consumable {
                     return true
                 end
             }))
-            for i = 1, #G.hand.highlighted do
-                local percent = 1.15 - (i - 0.999) / (#G.hand.highlighted - 0.998) * 0.3
+            for i = 1, #affected_cards do
+                local percent = 1.15 - (i - 0.999) / (#affected_cards - 0.998) * 0.3
                 G.E_MANAGER:add_event(Event({
                     trigger = 'after',
                     delay = 0.15,
                     func = function()
-                        G.hand.highlighted[i]:flip()
+                        affected_cards[i]:flip()
                         play_sound('card1', percent)
-                        G.hand.highlighted[i]:juice_up(0.3, 0.3)
+                        affected_cards[i]:juice_up(0.3, 0.3)
                         return true
                     end
                 }))
             end
             delay(0.2)
-            for i = 1, #G.hand.highlighted do
+            for i = 1, #affected_cards do
                 G.E_MANAGER:add_event(Event({
                     trigger = 'after',
                     delay = 0.1,
                     func = function()
-                        G.hand.highlighted[i]:set_seal("arashi_orangeseal", nil, true)
+                        affected_cards[i]:set_seal("arashi_orangeseal", nil, true)
                         return true
                     end
                 }))
             end
-            for i = 1, #G.hand.highlighted do
-                local percent = 0.85 + (i - 0.999) / (#G.hand.highlighted - 0.998) * 0.3
+            for i = 1, #affected_cards do
+                local percent = 0.85 + (i - 0.999) / (#affected_cards - 0.998) * 0.3
                 G.E_MANAGER:add_event(Event({
                     trigger = 'after',
                     delay = 0.15,
                     func = function()
-                        G.hand.highlighted[i]:flip()
+                        affected_cards[i]:flip()
                         play_sound('tarot2', percent, 0.6)
-                        G.hand.highlighted[i]:juice_up(0.3, 0.3)
+                        affected_cards[i]:juice_up(0.3, 0.3)
                         return true
                     end
                 }))
@@ -76,6 +92,6 @@ SMODS.Consumable {
         end
     end,
     can_use = function(self, card)
-        return (#G.hand.highlighted == 1)
+        return (to_big(#G.hand.highlighted) == to_big(1))
     end
 }

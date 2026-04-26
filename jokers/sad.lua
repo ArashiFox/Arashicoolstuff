@@ -1,8 +1,9 @@
+
 SMODS.Joker{ --Sad chocolate milk
     key = "sad",
     config = {
         extra = {
-            Xmult = 0.3
+            xmult0 = 0.3
         }
     },
     loc_txt = {
@@ -32,32 +33,42 @@ SMODS.Joker{ --Sad chocolate milk
     atlas = 'CustomJokers',
     pools = { ["arashi_food"] = true },
     in_pool = function(self, args)
-          return (
-          not args 
-          or args.source ~= 'sho' 
-          or args.source == 'buf' or args.source == 'jud' or args.source == 'rif' or args.source == 'rta' or args.source == 'sou' or args.source == 'uta' or args.source == 'wra'
-          )
-          and true
-      end,
-
+        return (
+            not args 
+            or args.source ~= 'sho' 
+            or args.source == 'buf' or args.source == 'jud' or args.source == 'rif' or args.source == 'rta' or args.source == 'sou' or args.source == 'uta' or args.source == 'wra'
+        )
+        and true
+    end,
+    
     set_ability = function(self, card, initial)
         card:set_eternal(true)
     end,
-
+    
     calculate = function(self, card, context)
         if context.cardarea == G.jokers and context.joker_main  then
-                return {
-                    Xmult = card.ability.extra.Xmult
-                }
+            return {
+                Xmult = 0.3
+            }
         end
         if context.end_of_round and context.game_over == false and context.main_eval  then
-                return {
-                    func = function()
-                card:start_dissolve()
-                return true
-            end,
-                    message = "Drank!"
-                }
+            return {
+                func = function()
+                    local target_joker = card
+                    
+                    if target_joker then
+                        target_joker.getting_sliced = true
+                        G.E_MANAGER:add_event(Event({
+                            func = function()
+                                target_joker:start_dissolve({G.C.RED}, nil, 1.6)
+                                return true
+                            end
+                        }))
+                        card_eval_status_text(context.blueprint_card or card, 'extra', nil, nil, nil, {message = "Drank!", colour = G.C.RED})
+                    end
+                    return true
+                end
+            }
         end
     end
 }
@@ -68,4 +79,14 @@ G.FUNCS.check_for_buy_space = function(card)
         return true
     end
     return check_for_buy_space_ref(card)
+end
+
+local can_select_card_ref = G.FUNCS.can_select_card
+G.FUNCS.can_select_card = function(e)
+    	if e.config.ref_table.config.center.key == "j_arashi_sad" then
+        		e.config.colour = G.C.GREEN
+        		e.config.button = "use_card"
+    	else
+        		can_select_card_ref(e)
+    	end
 end

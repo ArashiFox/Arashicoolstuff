@@ -1,25 +1,25 @@
 
-SMODS.Joker{ --Bossan
-    key = "bossan",
+SMODS.Joker{ --Jussegutten
+    key = "jussegutten",
     config = {
         extra = {
-            bap = 0,
-            currenthandsize = 0
+            mult = 1
         }
     },
     loc_txt = {
-        ['name'] = 'Bossan',
+        ['name'] = 'Jussegutten',
         ['text'] = {
-            [1] = 'Changes your {C:attention}Joker{} slots',
-            [2] = 'to your {C:attention}hand size{}'
+            [1] = 'Gains {X:mult,C:white}X0.5{} Mult when a {C:attention}card{}',
+            [2] = 'is {C:attention}bought, sold{} or {C:attention}used{}',
+            [3] = '{C:inactive}(Currently {X:mult,C:white}#1#{}{}{C:inactive}){}'
         },
         ['unlock'] = {
             [1] = 'Unlocked by default.'
         }
     },
     pos = {
-        x = 3,
-        y = 0
+        x = 1,
+        y = 3
     },
     display_size = {
         w = 71 * 1, 
@@ -34,8 +34,8 @@ SMODS.Joker{ --Bossan
     discovered = true,
     atlas = 'CustomJokers',
     soul_pos = {
-        x = 4,
-        y = 0
+        x = 2,
+        y = 3
     },
     in_pool = function(self, args)
         return (
@@ -48,14 +48,14 @@ SMODS.Joker{ --Bossan
     
     loc_vars = function(self, info_queue, card)
         
-        return {vars = {card.ability.extra.bap, ((G.hand and G.hand.config.card_limit or 0) or 0)}}
+        return {vars = {card.ability.extra.mult}}
     end,
     
     calculate = function(self, card, context)
-        if context.end_of_round and context.game_over == false and context.main_eval  then
+        if context.selling_card  then
             return {
                 func = function()
-                    card.ability.extra.bap = (G.hand and G.hand.config.card_limit or 0)
+                    card.ability.extra.mult = (card.ability.extra.mult) + 0.5
                     return true
                 end
             }
@@ -63,21 +63,23 @@ SMODS.Joker{ --Bossan
         if context.buying_card  then
             return {
                 func = function()
-                    card.ability.extra.bap = (G.hand and G.hand.config.card_limit or 0)
+                    card.ability.extra.mult = (card.ability.extra.mult) + 0.5
                     return true
                 end
             }
         end
-    end,
-    
-    add_to_deck = function(self, card, from_debuff)
-        card.ability.extra.original_joker_slots = G.jokers.config.card_limit
-        G.jokers.config.card_limit = card.ability.extra.bap
-    end,
-    
-    remove_from_deck = function(self, card, from_debuff)
-        if card.ability.extra.original_joker_slots then
-            G.jokers.config.card_limit = card.ability.extra.original_joker_slots
+        if context.using_consumeable  then
+            return {
+                func = function()
+                    card.ability.extra.mult = (card.ability.extra.mult) + 0.5
+                    return true
+                end
+            }
+        end
+        if context.cardarea == G.jokers and context.joker_main  then
+            return {
+                Xmult = card.ability.extra.mult
+            }
         end
     end
 }

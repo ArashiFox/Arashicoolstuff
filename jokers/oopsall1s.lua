@@ -1,9 +1,9 @@
+
 SMODS.Joker{ --Oops! All 1s
     key = "oopsall1s",
     config = {
         extra = {
-            set_probability = 0,
-            numerator = 0
+            set_probability0 = 0
         }
     },
     loc_txt = {
@@ -33,15 +33,15 @@ SMODS.Joker{ --Oops! All 1s
     unlocked = true,
     discovered = true,
     atlas = 'CustomJokers',
-
+    
     calculate = function(self, card, context)
         if context.fix_probability and not context.blueprint then
-        local numerator, denominator = context.numerator, context.denominator
-                numerator = card.ability.extra.set_probability
-      return {
-        numerator = numerator, 
-        denominator = denominator
-      }
+            local numerator, denominator = context.numerator, context.denominator
+            numerator = 0
+            return {
+                numerator = numerator, 
+                denominator = denominator
+            }
         end
     end
 }

@@ -1,3 +1,4 @@
+
 SMODS.Joker{ --Big Joker
     key = "bigjoker",
     config = {
@@ -17,7 +18,7 @@ SMODS.Joker{ --Big Joker
         }
     },
     pos = {
-        x = 1,
+        x = 2,
         y = 0
     },
     display_size = {
@@ -32,11 +33,12 @@ SMODS.Joker{ --Big Joker
     unlocked = true,
     discovered = true,
     atlas = 'CustomJokers',
-
+    
     loc_vars = function(self, info_queue, card)
+        
         return {vars = {card.ability.extra.xchips}}
     end,
-
+    
     calculate = function(self, card, context)
         if context.individual and context.cardarea == G.play  then
             if context.other_card:get_id() == 14 then
@@ -47,9 +49,9 @@ SMODS.Joker{ --Big Joker
             end
         end
         if context.cardarea == G.jokers and context.joker_main  then
-                return {
-                    x_chips = card.ability.extra.xchips
-                }
+            return {
+                x_chips = card.ability.extra.xchips
+            }
         end
     end
 }

@@ -1,3 +1,4 @@
+
 SMODS.Joker{ --Envy
     key = "envy",
     config = {
@@ -23,7 +24,7 @@ SMODS.Joker{ --Envy
         }
     },
     pos = {
-        x = 8,
+        x = 9,
         y = 0
     },
     display_size = {
@@ -38,47 +39,63 @@ SMODS.Joker{ --Envy
     unlocked = true,
     discovered = true,
     atlas = 'CustomJokers',
-
+    
     loc_vars = function(self, info_queue, card)
+        
         return {vars = {card.ability.extra.chips, card.ability.extra.mult, card.ability.extra.xmult}}
     end,
-
+    
     set_ability = function(self, card, initial)
         card:set_eternal(true)
     end,
-
+    
     calculate = function(self, card, context)
         if context.individual and context.cardarea == G.play  and not context.blueprint then
             if context.other_card.edition and context.other_card.edition.key == "e_foil" then
-                context.other_card:set_edition(nil)
+                local scored_card = context.other_card
+                G.E_MANAGER:add_event(Event({
+                    func = function()
+                        
+                        scored_card:set_edition(nil)
+                        card_eval_status_text(scored_card, 'extra', nil, nil, nil, {message = "Card Modified!", colour = G.C.ORANGE})
+                        return true
+                    end
+                }))
                 card.ability.extra.chips = (card.ability.extra.chips) + 50
-                return {
-                    message = "Card Modified!"
-                }
             elseif context.other_card.edition and context.other_card.edition.key == "e_holo" then
-                context.other_card:set_edition(nil)
+                local scored_card = context.other_card
+                G.E_MANAGER:add_event(Event({
+                    func = function()
+                        
+                        scored_card:set_edition(nil)
+                        card_eval_status_text(scored_card, 'extra', nil, nil, nil, {message = "Card Modified!", colour = G.C.ORANGE})
+                        return true
+                    end
+                }))
                 card.ability.extra.mult = (card.ability.extra.mult) + 10
-                return {
-                    message = "Card Modified!"
-                }
             elseif context.other_card.edition and context.other_card.edition.key == "e_polychrome" then
-                context.other_card:set_edition(nil)
+                local scored_card = context.other_card
+                G.E_MANAGER:add_event(Event({
+                    func = function()
+                        
+                        scored_card:set_edition(nil)
+                        card_eval_status_text(scored_card, 'extra', nil, nil, nil, {message = "Card Modified!", colour = G.C.ORANGE})
+                        return true
+                    end
+                }))
                 card.ability.extra.xmult = (card.ability.extra.xmult) * 1.5
-                return {
-                    message = "Card Modified!"
-                }
             end
         end
         if context.cardarea == G.jokers and context.joker_main  then
-                return {
-                    chips = card.ability.extra.chips,
+            return {
+                chips = card.ability.extra.chips,
+                extra = {
+                    mult = card.ability.extra.mult,
                     extra = {
-                        mult = card.ability.extra.mult,
-                        extra = {
-                            Xmult = card.ability.extra.xmult
-                        }
-                        }
+                        Xmult = card.ability.extra.xmult
+                    }
                 }
+            }
         end
     end
 }

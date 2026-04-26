@@ -1,8 +1,9 @@
+
 SMODS.Joker{ --Sloth
     key = "sloth",
     config = {
         extra = {
-            ante_value = 2
+            ante_value0 = 2
         }
     },
     loc_txt = {
@@ -32,27 +33,29 @@ SMODS.Joker{ --Sloth
     unlocked = true,
     discovered = true,
     atlas = 'CustomJokers',
-
+    
     set_ability = function(self, card, initial)
         card:set_eternal(true)
     end,
-
+    
     calculate = function(self, card, context)
         if context.buying_card and context.card.config.center.key == self.key and context.cardarea == G.jokers  then
-                return {
-                    func = function()
-                    local mod = -card.ability.extra.ante_value
-		ease_ante(mod)
-		G.E_MANAGER:add_event(Event({
-			func = function()
-				G.GAME.round_resets.blind_ante = G.GAME.round_resets.blind_ante + mod
-				return true
-			end,
-		}))
+            return {
+                
+                func = function()
+                    
+                    local mod = -2
+                    ease_ante(mod)
+                    G.E_MANAGER:add_event(Event({
+                        func = function()
+                            G.GAME.round_resets.blind_ante = G.GAME.round_resets.blind_ante + mod
+                            return true
+                        end,
+                    }))
                     return true
                 end,
-                    message = "Ante -" .. card.ability.extra.ante_value
-                }
+                message = "Ante -" .. 2
+            }
         end
     end
 }

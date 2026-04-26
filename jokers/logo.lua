@@ -1,8 +1,9 @@
+
 SMODS.Joker{ --Logo
     key = "logo",
     config = {
         extra = {
-            echips = 7
+            echips0 = 7
         }
     },
     loc_txt = {
@@ -31,19 +32,18 @@ SMODS.Joker{ --Logo
     unlocked = true,
     discovered = true,
     atlas = 'CustomJokers',
-
+    
     calculate = function(self, card, context)
         if context.individual and context.cardarea == G.play  then
             if (context.other_card:get_id() == 14 and context.other_card:is_suit("Hearts") and (function()
-      for i = 1, #G.jokers.cards do
-          if G.jokers.cards[i].config.center.key == "j_joker" then
-              return true
-          end
-      end
-      return false
-  end)()) then
+                for i, v in pairs(G.jokers.cards) do
+                    if v.config.center.key == "j_joker" then 
+                        return true
+                    end
+                end
+            end)()) then
                 return {
-                    e_chips = card.ability.extra.echips
+                    e_chips = 7
                 }
             end
         end

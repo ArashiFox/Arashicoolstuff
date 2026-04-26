@@ -1,11 +1,11 @@
+
 SMODS.Joker{ --Freddy fazbear
     key = "freddy",
     config = {
         extra = {
             xmult = 1,
-            scale = 1,
-            rotation = 1,
-            onetime = 0
+            scale0 = 1,
+            rotation0 = 1
         }
     },
     loc_txt = {
@@ -20,8 +20,8 @@ SMODS.Joker{ --Freddy fazbear
         }
     },
     pos = {
-        x = 9,
-        y = 0
+        x = 0,
+        y = 1
     },
     display_size = {
         w = 71 * 1, 
@@ -35,11 +35,12 @@ SMODS.Joker{ --Freddy fazbear
     unlocked = true,
     discovered = true,
     atlas = 'CustomJokers',
-
+    
     loc_vars = function(self, info_queue, card)
+        
         return {vars = {card.ability.extra.xmult}}
     end,
-
+    
     calculate = function(self, card, context)
         if context.destroy_card and context.destroy_card.should_destroy  then
             return { remove = true }
@@ -52,8 +53,8 @@ SMODS.Joker{ --Freddy fazbear
                 card.ability.extra.xmult = (card.ability.extra.xmult) + 1.5
                 return {
                     func = function()
-                      card:juice_up(card.ability.extra.scale, card.ability.extra.rotation)
-                      return true
+                        card:juice_up(1, 1)
+                        return true
                     end,
                     extra = {
                         message = "X#1#",
@@ -62,14 +63,14 @@ SMODS.Joker{ --Freddy fazbear
                             message = "Jumpscare!",
                             colour = G.C.RED
                         }
-                        }
+                    }
                 }
             end
         end
         if context.cardarea == G.jokers and context.joker_main  then
-                return {
-                    Xmult = card.ability.extra.xmult
-                }
+            return {
+                Xmult = card.ability.extra.xmult
+            }
         end
     end
 }

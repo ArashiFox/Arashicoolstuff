@@ -1,3 +1,4 @@
+
 SMODS.Joker{ --Gluttony
     key = "gluttony",
     config = {
@@ -34,28 +35,29 @@ SMODS.Joker{ --Gluttony
     unlocked = true,
     discovered = true,
     atlas = 'CustomJokers',
-
+    
     loc_vars = function(self, info_queue, card)
+        
         return {vars = {card.ability.extra.xmult}}
     end,
-
+    
     set_ability = function(self, card, initial)
         card:set_eternal(true)
     end,
-
+    
     calculate = function(self, card, context)
         if context.remove_playing_cards  then
-                return {
-                    func = function()
+            return {
+                func = function()
                     card.ability.extra.xmult = (card.ability.extra.xmult) + 0.2
                     return true
                 end
-                }
+            }
         end
         if context.cardarea == G.jokers and context.joker_main  then
-                return {
-                    Xmult = card.ability.extra.xmult
-                }
+            return {
+                Xmult = card.ability.extra.xmult
+            }
         end
     end
 }

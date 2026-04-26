@@ -1,3 +1,4 @@
+
 SMODS.Joker{ --Jussi
     key = "jussi",
     config = {
@@ -8,7 +9,7 @@ SMODS.Joker{ --Jussi
     loc_txt = {
         ['name'] = 'Jussi',
         ['text'] = {
-            [1] = 'Gains {X:red,C:white}X0.5{} Mult when a {C:attention}card{}',
+            [1] = 'Gains {X:red,C:white}X0.25{} Mult when a {C:attention}card{}',
             [2] = 'is {C:attention}bought{}',
             [3] = '{C:inactive}(Currently {X:red,C:white}X#1#{} {C:inactive}Mult){}'
         },
@@ -33,24 +34,25 @@ SMODS.Joker{ --Jussi
     discovered = true,
     atlas = 'CustomJokers',
     pools = { ["arashi_pet"] = true },
-
+    
     loc_vars = function(self, info_queue, card)
+        
         return {vars = {card.ability.extra.xmult}}
     end,
-
+    
     calculate = function(self, card, context)
         if context.buying_card  then
-                return {
-                    func = function()
-                    card.ability.extra.xmult = (card.ability.extra.xmult) + 0.5
+            return {
+                func = function()
+                    card.ability.extra.xmult = (card.ability.extra.xmult) + 0.25
                     return true
                 end
-                }
+            }
         end
         if context.cardarea == G.jokers and context.joker_main  then
-                return {
-                    Xmult = card.ability.extra.xmult
-                }
+            return {
+                Xmult = card.ability.extra.xmult
+            }
         end
     end
 }

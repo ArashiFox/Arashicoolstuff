@@ -1,8 +1,8 @@
+
 SMODS.Joker{ --Driving in my car
     key = "drivinginmycar",
     config = {
         extra = {
-            var1 = 0
         }
     },
     loc_txt = {
@@ -23,7 +23,7 @@ SMODS.Joker{ --Driving in my car
         }
     },
     pos = {
-        x = 6,
+        x = 7,
         y = 0
     },
     display_size = {
@@ -38,53 +38,53 @@ SMODS.Joker{ --Driving in my car
     unlocked = true,
     discovered = true,
     atlas = 'CustomJokers',
-
+    
     calculate = function(self, card, context)
         if context.cardarea == G.jokers and context.joker_main  then
-                local created_joker = false
-    if #G.jokers.cards + G.GAME.joker_buffer < G.jokers.config.card_limit then
-        created_joker = true
-        G.GAME.joker_buffer = G.GAME.joker_buffer + 1
-                  G.E_MANAGER:add_event(Event({
-                      func = function()
-                          local joker_card = SMODS.add_card({ set = 'Joker', key = 'j_arashi_deer' })
-                          if joker_card then
-                              
-                              
-                          end
-                          G.GAME.joker_buffer = 0
-                          return true
-                      end
-                  }))
-                  end
-                return {
-                    message = created_joker and localize('k_plus_joker') or nil
-                }
+            local created_joker = false
+            if #G.jokers.cards + G.GAME.joker_buffer < G.jokers.config.card_limit then
+                created_joker = true
+                G.GAME.joker_buffer = G.GAME.joker_buffer + 1
+                G.E_MANAGER:add_event(Event({
+                    func = function()
+                        local joker_card = SMODS.add_card({ set = 'Joker', key = 'j_arashi_deer' })
+                        if joker_card then
+                            
+                            
+                        end
+                        G.GAME.joker_buffer = 0
+                        return true
+                    end
+                }))
+            end
+            return {
+                message = created_joker and localize('k_plus_joker') or nil
+            }
         end
         if context.pre_discard  then
-                return {
-                    func = function()
-                local target_joker = nil
-                for i, joker in ipairs(G.jokers.cards) do
-                    if joker.config.center.key == "j_arashi_deer" and not joker.ability.eternal and not joker.getting_sliced then
-                        target_joker = joker
-                        break
-                    end
-                end
-                
-                if target_joker then
-                    target_joker.getting_sliced = true
-                    G.E_MANAGER:add_event(Event({
-                        func = function()
-                            target_joker:start_dissolve({G.C.RED}, nil, 1.6)
-                            return true
+            return {
+                func = function()
+                    local target_joker = nil
+                    for i, joker in ipairs(G.jokers.cards) do
+                        if joker.config.center.key == "j_arashi_deer" and not SMODS.is_eternal(joker) and not joker.getting_sliced then
+                            target_joker = joker
+                            break
                         end
-                    }))
-                    card_eval_status_text(context.blueprint_card or card, 'extra', nil, nil, nil, {message = "Destroyed!", colour = G.C.RED})
-                end
+                    end
+                    
+                    if target_joker then
+                        target_joker.getting_sliced = true
+                        G.E_MANAGER:add_event(Event({
+                            func = function()
+                                target_joker:start_dissolve({G.C.RED}, nil, 1.6)
+                                return true
+                            end
+                        }))
+                        card_eval_status_text(context.blueprint_card or card, 'extra', nil, nil, nil, {message = "Destroyed!", colour = G.C.RED})
+                    end
                     return true
                 end
-                }
+            }
         end
     end
 }

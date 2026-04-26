@@ -4,7 +4,7 @@ SMODS.Atlas({
     px = 34,
     py = 34,
     atlas_table = "ASSET_ATLAS"
-}):register()
+})
 
 SMODS.Atlas({
     key = "CustomJokers", 
@@ -12,7 +12,7 @@ SMODS.Atlas({
     px = 71,
     py = 95, 
     atlas_table = "ASSET_ATLAS"
-}):register()
+})
 
 SMODS.Atlas({
     key = "CustomConsumables", 
@@ -20,7 +20,7 @@ SMODS.Atlas({
     px = 71,
     py = 95, 
     atlas_table = "ASSET_ATLAS"
-}):register()
+})
 
 SMODS.Atlas({
     key = "CustomSeals", 
@@ -33,46 +33,68 @@ SMODS.Atlas({
 local NFS = require("nativefs")
 to_big = to_big or function(a) return a end
 lenient_bignum = lenient_bignum or function(a) return a end
-
-local function load_jokers_folder()
-    local mod_path = SMODS.current_mod.path
-    local jokers_path = mod_path .. "/jokers"
-    local files = NFS.getDirectoryItemsInfo(jokers_path)
+-- this function is used to load everything within a folder.-- Jokerforge doesnt use it because it doesnt make loading order easy
+local function load_folder(path)
+    local files = NFS.getDirectoryItemsInfo(mod_path .. "/" .. path)
     for i = 1, #files do
         local file_name = files[i].name
         if file_name:sub(-4) == ".lua" then
-            assert(SMODS.load_file("jokers/" .. file_name))()
+            assert(SMODS.load_file(path .. file_name))()
         end
     end
 end
-
-local function load_consumables_folder()
-    local mod_path = SMODS.current_mod.path
-    local consumables_path = mod_path .. "/consumables"
-    local files = NFS.getDirectoryItemsInfo(consumables_path)
-    for i = 1, #files do
-        local file_name = files[i].name
-        if file_name:sub(-4) == ".lua" then
-            assert(SMODS.load_file("consumables/" .. file_name))()
-        end
-    end
+-- load the jokers
+if true then
+    assert(SMODS.load_file("jokers/wrath.lua"))()
+    assert(SMODS.load_file("jokers/click.lua"))()
+    assert(SMODS.load_file("jokers/bigjoker.lua"))()
+    assert(SMODS.load_file("jokers/bossan.lua"))()
+    assert(SMODS.load_file("jokers/chocolatemilk.lua"))()
+    assert(SMODS.load_file("jokers/deer.lua"))()
+    assert(SMODS.load_file("jokers/drivinginmycar.lua"))()
+    assert(SMODS.load_file("jokers/emptybottle.lua"))()
+    assert(SMODS.load_file("jokers/envy.lua"))()
+    assert(SMODS.load_file("jokers/freddy.lua"))()
+    assert(SMODS.load_file("jokers/gluttony.lua"))()
+    assert(SMODS.load_file("jokers/gilbert.lua"))()
+    assert(SMODS.load_file("jokers/grager.lua"))()
+    assert(SMODS.load_file("jokers/grocerystore.lua"))()
+    assert(SMODS.load_file("jokers/jussi.lua"))()
+    assert(SMODS.load_file("jokers/kitler.lua"))()
+    assert(SMODS.load_file("jokers/leo.lua"))()
+    assert(SMODS.load_file("jokers/logo.lua"))()
+    assert(SMODS.load_file("jokers/oopsall1s.lua"))()
+    assert(SMODS.load_file("jokers/oopsall60s.lua"))()
+    assert(SMODS.load_file("jokers/philosophicjoker.lua"))()
+    assert(SMODS.load_file("jokers/sad.lua"))()
+    assert(SMODS.load_file("jokers/sloth.lua"))()
+    assert(SMODS.load_file("jokers/supergilb.lua"))()
+    assert(SMODS.load_file("jokers/hennie.lua"))()
+    assert(SMODS.load_file("jokers/triggerhappy.lua"))()
+    assert(SMODS.load_file("jokers/trond.lua"))()
+    assert(SMODS.load_file("jokers/warpedjoker.lua"))()
+    assert(SMODS.load_file("jokers/waterbottle.lua"))()
+    assert(SMODS.load_file("jokers/wellthisstinks.lua"))()
+    assert(SMODS.load_file("jokers/jussegutten.lua"))()
+    assert(SMODS.load_file("jokers/loyloy.lua"))()
+    assert(SMODS.load_file("jokers/poppy.lua"))()
+    assert(SMODS.load_file("jokers/brainrot.lua"))()
+    assert(SMODS.load_file("jokers/greed.lua"))()
+    assert(SMODS.load_file("jokers/yapchatfilter.lua"))()
+end
+-- load the consumables
+if true then
+    assert(SMODS.load_file("consumables/roffle.lua"))()
+    assert(SMODS.load_file("consumables/dogement.lua"))()
+    assert(SMODS.load_file("consumables/gilbert.lua"))()
+    assert(SMODS.load_file("consumables/oracle.lua"))()
+end
+-- load the seals
+if true then
+    assert(SMODS.load_file("seals/orangeseal.lua"))()
+    assert(SMODS.load_file("seals/gilbertseal.lua"))()
 end
 
-local function load_seals_folder()
-    local mod_path = SMODS.current_mod.path
-    local seals_path = mod_path .. "/seals"
-    local files = NFS.getDirectoryItemsInfo(seals_path)
-    for i = 1, #files do
-        local file_name = files[i].name
-        if file_name:sub(-4) == ".lua" then
-            assert(SMODS.load_file("seals/" .. file_name))()
-        end
-    end
-end
-
-load_jokers_folder()
-load_consumables_folder()
-load_seals_folder()
 SMODS.ObjectType({
     key = "arashi_food",
     cards = {
@@ -95,8 +117,24 @@ SMODS.ObjectType({
 SMODS.ObjectType({
     key = "arashi_pet",
     cards = {
-        ["j_arashi_bossan"] = true,
         ["j_arashi_jussi"] = true,
-        ["j_arashi_leo"] = true
+        ["j_arashi_leo"] = true,
+        ["j_arashi_poppy"] = true
     },
 })
+
+SMODS.ObjectType({
+    key = "arashi_arashi_jokers",
+    cards = {
+        ["j_arashi_brainrot"] = true,
+        ["j_arashi_greed"] = true,
+        ["j_arashi_yapchatfilter"] = true
+    },
+})
+
+
+SMODS.current_mod.optional_features = function()
+    return {
+        cardareas = {} 
+    }
+end

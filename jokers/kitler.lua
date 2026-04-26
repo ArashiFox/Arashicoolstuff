@@ -1,3 +1,4 @@
+
 SMODS.Joker{ --Kitler
     key = "kitler",
     config = {
@@ -33,11 +34,12 @@ SMODS.Joker{ --Kitler
     unlocked = true,
     discovered = true,
     atlas = 'CustomJokers',
-
+    
     loc_vars = function(self, info_queue, card)
+        
         return {vars = {card.ability.extra.mult}}
     end,
-
+    
     calculate = function(self, card, context)
         if context.individual and context.cardarea == G.play  then
             if (not (context.other_card.lucky_trigger) and SMODS.get_enhancements(context.other_card)["m_lucky"] == true) then
@@ -47,9 +49,9 @@ SMODS.Joker{ --Kitler
             end
         end
         if context.cardarea == G.jokers and context.joker_main  then
-                return {
-                    mult = card.ability.extra.mult
-                }
+            return {
+                mult = card.ability.extra.mult
+            }
         end
     end
 }

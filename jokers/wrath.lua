@@ -1,3 +1,4 @@
+
 SMODS.Joker{ --Wrath
     key = "wrath",
     config = {
@@ -16,8 +17,8 @@ SMODS.Joker{ --Wrath
         }
     },
     pos = {
-        x = 1,
-        y = 3
+        x = 0,
+        y = 0
     },
     display_size = {
         w = 71 * 1, 
@@ -31,17 +32,22 @@ SMODS.Joker{ --Wrath
     unlocked = true,
     discovered = true,
     atlas = 'CustomJokers',
-
+    
     set_ability = function(self, card, initial)
         card:set_eternal(true)
     end,
-
+    
     calculate = function(self, card, context)
         if context.individual and context.cardarea == G.play  then
-                context.other_card:set_ability(G.P_CENTERS.m_glass)
-                return {
-                    message = "Card Modified!"
-                }
+            local scored_card = context.other_card
+            G.E_MANAGER:add_event(Event({
+                func = function()
+                    
+                    scored_card:set_ability(G.P_CENTERS.m_glass)
+                    card_eval_status_text(scored_card, 'extra', nil, nil, nil, {message = "Card Modified!", colour = G.C.ORANGE})
+                    return true
+                end
+            }))
         end
     end
 }

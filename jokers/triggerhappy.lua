@@ -1,3 +1,4 @@
+
 SMODS.Joker{ --Trigger happy
     key = "triggerhappy",
     config = {
@@ -31,22 +32,23 @@ SMODS.Joker{ --Trigger happy
     unlocked = true,
     discovered = true,
     atlas = 'CustomJokers',
-
+    
     loc_vars = function(self, info_queue, card)
+        
         return {vars = {card.ability.extra.xmult}}
     end,
-
+    
     calculate = function(self, card, context)
         if context.individual and context.cardarea == G.play  then
-                card.ability.extra.xmult = (card.ability.extra.xmult) + 0.01
-                return {
-                    message = "Bang!"
-                }
+            card.ability.extra.xmult = (card.ability.extra.xmult) + 0.01
+            return {
+                message = "Bang!"
+            }
         end
         if context.cardarea == G.jokers and context.joker_main  then
-                return {
-                    Xmult = card.ability.extra.xmult
-                }
+            return {
+                Xmult = card.ability.extra.xmult
+            }
         end
     end
 }

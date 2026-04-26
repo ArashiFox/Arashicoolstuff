@@ -1,9 +1,10 @@
+
 SMODS.Joker{ --Adam Jonkler
     key = "click",
     config = {
         extra = {
             xmult = 2.4,
-            dollars = 15
+            dollars0 = 15
         }
     },
     loc_txt = {
@@ -19,7 +20,7 @@ SMODS.Joker{ --Adam Jonkler
         }
     },
     pos = {
-        x = 0,
+        x = 1,
         y = 0
     },
     display_size = {
@@ -34,31 +35,51 @@ SMODS.Joker{ --Adam Jonkler
     unlocked = true,
     discovered = true,
     atlas = 'CustomJokers',
-
+    
     loc_vars = function(self, info_queue, card)
+        
         return {vars = {card.ability.extra.xmult}}
     end,
-
+    
     calculate = function(self, card, context)
         if context.skip_blind  then
-            if card.ability.extra.xmult <= 1 then
+            if to_big(card.ability.extra.xmult) <= to_big(1) then
                 return {
                     func = function()
-                card:start_dissolve()
-                return true
-            end,
-                    message = "Life wasted!"
+                        local target_joker = card
+                        
+                        if target_joker then
+                            target_joker.getting_sliced = true
+                            G.E_MANAGER:add_event(Event({
+                                func = function()
+                                    target_joker:start_dissolve({G.C.RED}, nil, 1.6)
+                                    return true
+                                end
+                            }))
+                            card_eval_status_text(context.blueprint_card or card, 'extra', nil, nil, nil, {message = "Life wasted!", colour = G.C.RED})
+                        end
+                        return true
+                    end
                 }
             else
                 return {
                     func = function()
-                    card.ability.extra.xmult = math.max(0, (card.ability.extra.xmult) - 0.2)
-                    return true
-                end,
+                        card.ability.extra.xmult = math.max(0, (card.ability.extra.xmult) - 0.2)
+                        return true
+                    end,
                     extra = {
-                        dollars = card.ability.extra.dollars,
+                        
+                        func = function()
+                            
+                            local current_dollars = G.GAME.dollars
+                            local target_dollars = G.GAME.dollars + 15
+                            local dollar_value = target_dollars - current_dollars
+                            ease_dollars(dollar_value)
+                            card_eval_status_text(context.blueprint_card or card, 'extra', nil, nil, nil, {message = "+"..tostring(15), colour = G.C.MONEY})
+                            return true
+                        end,
                         colour = G.C.MONEY
-                        }
+                    }
                 }
             end
         end

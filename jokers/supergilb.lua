@@ -1,3 +1,4 @@
+
 SMODS.Joker{ --Super gilb(200k iq)
     key = "supergilb",
     config = {
@@ -30,30 +31,36 @@ SMODS.Joker{ --Super gilb(200k iq)
     discovered = true,
     atlas = 'CustomJokers',
     in_pool = function(self, args)
-          return (
-          not args 
-          or args.source ~= 'sho' 
-          or args.source == 'buf' or args.source == 'jud' or args.source == 'rif' or args.source == 'rta' or args.source == 'sou' or args.source == 'uta' or args.source == 'wra'
-          )
-          and true
-      end,
-
+        return (
+            not args 
+            or args.source ~= 'sho' 
+            or args.source == 'buf' or args.source == 'jud' or args.source == 'rif' or args.source == 'rta' or args.source == 'sou' or args.source == 'uta' or args.source == 'wra'
+        )
+        and true
+    end,
+    
     set_ability = function(self, card, initial)
         card:set_eternal(true)
     end,
-
+    
     calculate = function(self, card, context)
         if context.cardarea == G.jokers and context.joker_main  then
-                local created_consumable = true
+            for i = 1, math.min(1, G.consumeables.config.card_limit - #G.consumeables.cards) do
                 G.E_MANAGER:add_event(Event({
+                    trigger = 'after',
+                    delay = 0.4,
                     func = function()
-                        SMODS.add_card{set = 'Spectral', key = nil, edition = 'e_negative', key_append = 'joker_forge_spectral'}
+                        play_sound('timpani')
+                        SMODS.add_card({ set = 'Spectral', })                            
+                        card:juice_up(0.3, 0.5)
                         return true
                     end
                 }))
-                return {
-                    message = created_consumable and localize('k_plus_spectral') or nil
-                }
+            end
+            delay(0.6)
+            return {
+                message = created_consumable and localize('k_plus_spectral') or nil
+            }
         end
     end
 }
