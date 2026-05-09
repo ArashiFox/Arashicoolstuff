@@ -81,6 +81,7 @@ if true then
     assert(SMODS.load_file("jokers/brainrot.lua"))()
     assert(SMODS.load_file("jokers/greed.lua"))()
     assert(SMODS.load_file("jokers/yapchatfilter.lua"))()
+    assert(SMODS.load_file("jokers/msskeleton.lua"))()
 end
 -- load the consumables
 if true then
@@ -128,7 +129,8 @@ SMODS.ObjectType({
     cards = {
         ["j_arashi_brainrot"] = true,
         ["j_arashi_greed"] = true,
-        ["j_arashi_yapchatfilter"] = true
+        ["j_arashi_yapchatfilter"] = true,
+        ["j_arashi_msskeleton"] = true
     },
 })
 

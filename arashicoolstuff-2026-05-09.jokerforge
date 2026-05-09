@@ -478,7 +478,6 @@
                 },
                 "value": {
                   "value": "bap",
-                  "label": "bap",
                   "valueType": "user_var"
                 }
               }
@@ -503,19 +502,22 @@
               "params": {
                 "variable_name": {
                   "value": "bap",
-                  "label": "bap",
                   "valueType": "user_var"
                 },
                 "operation": {
                   "value": "set",
-                  "label": "Set to value",
                   "valueType": "text"
                 },
-                "index_method": {},
-                "joker_key": {
-                  "value": "j_joker"
+                "index_method": {
+                  "valueType": "unknown"
                 },
-                "joker_variable": {},
+                "joker_key": {
+                  "value": "j_joker",
+                  "valueType": "unknown"
+                },
+                "joker_variable": {
+                  "valueType": "unknown"
+                },
                 "value": {
                   "value": "GAMEVAR:current_hand_size|1|0",
                   "valueType": "game_var"
@@ -542,19 +544,22 @@
               "params": {
                 "variable_name": {
                   "value": "bap",
-                  "label": "bap",
                   "valueType": "user_var"
                 },
                 "operation": {
                   "value": "set",
-                  "label": "Set to value",
                   "valueType": "text"
                 },
-                "index_method": {},
-                "joker_key": {
-                  "value": "j_joker"
+                "index_method": {
+                  "valueType": "unknown"
                 },
-                "joker_variable": {},
+                "joker_key": {
+                  "value": "j_joker",
+                  "valueType": "unknown"
+                },
+                "joker_variable": {
+                  "valueType": "unknown"
+                },
                 "value": {
                   "value": "GAMEVAR:current_hand_size|1|0",
                   "valueType": "game_var"
@@ -593,6 +598,7 @@
       "ignoreSlotLimit": false,
       "scale_h": 100,
       "scale_w": 100,
+      "pools": [],
       "orderValue": 4,
       "objectType": "joker",
       "info_queues": [],
@@ -4051,7 +4057,8 @@
           "position": {
             "x": 779.5,
             "y": 261.5
-          }
+          },
+          "loops": []
         },
         {
           "id": "191a44c1-ca9f-4f2a-8988-0c9cee25a971",
@@ -4102,7 +4109,8 @@
           "position": {
             "x": 168.5,
             "y": 123.5
-          }
+          },
+          "loops": []
         }
       ],
       "userVariables": [],
@@ -4320,6 +4328,7 @@
       "ignoreSlotLimit": false,
       "scale_h": 100,
       "scale_w": 100,
+      "pools": [],
       "orderValue": 31,
       "objectType": "joker",
       "info_queues": [],
@@ -4343,7 +4352,56 @@
       "unlockOperator": "",
       "unlockCount": 1,
       "unlockDescription": "Unlocked by default.",
-      "rules": [],
+      "rules": [
+        {
+          "id": "900f5ba6-234c-48f1-894c-5c33be38cb0e",
+          "trigger": "blind_selected",
+          "blueprintCompatible": true,
+          "conditionGroups": [],
+          "effects": [
+            {
+              "id": "f562255b-642d-464b-be1e-bf2015a8a5ab",
+              "type": "create_tag",
+              "params": {
+                "tag_type": {
+                  "value": "specific",
+                  "label": "Specific Tag",
+                  "valueType": "text"
+                },
+                "variable": {},
+                "specific_tag": {
+                  "value": "double",
+                  "label": "Double Tag - Gives copy of next Tag selected",
+                  "valueType": "text"
+                }
+              }
+            },
+            {
+              "id": "7b4a4864-0322-4171-80e2-e4aca8376513",
+              "type": "create_tag",
+              "params": {
+                "tag_type": {
+                  "value": "specific",
+                  "label": "Specific Tag",
+                  "valueType": "text"
+                },
+                "variable": {},
+                "specific_tag": {
+                  "value": "double",
+                  "label": "Double Tag - Gives copy of next Tag selected",
+                  "valueType": "text"
+                }
+              }
+            }
+          ],
+          "randomGroups": [],
+          "loops": [],
+          "position": {
+            "x": 779,
+            "y": 261.5
+          }
+        }
+      ],
       "userVariables": [],
       "placeholderCreditIndex": 16,
       "hasUserUploadedImage": true,
@@ -4360,6 +4418,7 @@
       "ignoreSlotLimit": false,
       "scale_h": 100,
       "scale_w": 100,
+      "pools": [],
       "orderValue": 32,
       "objectType": "joker",
       "info_queues": [],
@@ -4922,6 +4981,75 @@
       "objectType": "joker",
       "info_queues": [],
       "card_dependencies": []
+    },
+    {
+      "objectType": "joker",
+      "id": "3e09b451-734e-4c86-8282-4dcbbbbe5a27",
+      "name": "Ms. Skeleton",
+      "description": "A {C:blue}custom{} joker with {C:red}unique{} effects.",
+      "unlockDescription": "Unlocked by default.",
+      "imagePreview": "data:image/png;base64,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",
+      "overlayImagePreview": "",
+      "rarity": 4,
+      "cost": 20,
+      "blueprint_compat": true,
+      "eternal_compat": true,
+      "unlocked": true,
+      "discovered": true,
+      "rules": [
+        {
+          "id": "83cc5de6-f2c6-457d-8f8d-19bcfc46582e",
+          "trigger": "game_over",
+          "blueprintCompatible": true,
+          "conditionGroups": [],
+          "effects": [],
+          "randomGroups": [
+            {
+              "id": "b0a13bc3-f5df-4e77-9d7f-840770f72a5e",
+              "chance_numerator": {
+                "value": 1,
+                "valueType": "number"
+              },
+              "chance_denominator": {
+                "value": 2,
+                "valueType": "number"
+              },
+              "respect_probability_effects": true,
+              "custom_key": "",
+              "effects": [
+                {
+                  "id": "53e52486-9a12-4dfb-9956-d35e68958812",
+                  "type": "prevent_game_over",
+                  "params": {}
+                }
+              ]
+            }
+          ],
+          "loops": [],
+          "position": {
+            "x": 715,
+            "y": 288.5
+          }
+        }
+      ],
+      "orderValue": 37,
+      "placeholderCreditIndex": 48,
+      "appears_in_shop": false,
+      "cardAppearance": {
+        "buf": true,
+        "jud": true,
+        "rif": true,
+        "rta": true,
+        "sou": true,
+        "uta": true,
+        "wra": true
+      },
+      "appearFlags": "",
+      "pools": [
+        "arashi_jokers"
+      ],
+      "objectKey": "msskeleton",
+      "hasUserUploadedImage": false
     }
   ],
   "sounds": [],
@@ -5460,5 +5588,5 @@
   "vouchers": [],
   "decks": [],
   "version": "1.0.0",
-  "exportedAt": "2026-04-26T18:54:58.271Z"
+  "exportedAt": "2026-05-09T13:33:25.640Z"
 }
