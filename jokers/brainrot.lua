@@ -3,6 +3,8 @@ SMODS.Joker{ --Brainrotted joker
     key = "brainrot",
     config = {
         extra = {
+            scale0 = 10,
+            rotation0 = 20,
             xmult0 = 6.7
         }
     },
@@ -40,52 +42,27 @@ SMODS.Joker{ --Brainrotted joker
     },
     
     calculate = function(self, card, context)
-        if context.cardarea == G.jokers and context.joker_main  then
-            return {
-                Xmult = 6.7,
-                message = "sIx sEvEn!"
-            }
-        end
-        if context.hand_drawn  then
-            return {
-                message = "Jesterino Jimbolina!"
-            }
-        end
-        if context.open_booster  then
-            return {
-                message = "Skibidi Joker!"
-            }
-        end
-        if context.selling_self  then
+        if (context.end_of_round or context.reroll_shop or context.buying_card or
+            context.selling_card or context.ending_shop or context.starting_shop or 
+            context.ending_booster or context.skipping_booster or context.open_booster or
+            context.skip_blind or context.before or context.pre_discard or context.setting_blind or
+        context.using_consumeable)   then
+            local target_card = context.other_card
             return {
                 func = function()
-                    
-                    local created_joker = true
-                    G.E_MANAGER:add_event(Event({
-                        func = function()
-                            local joker_card = SMODS.add_card({ set = 'Joker', key = 'j_arashi_brainrot' })
-                            if joker_card then
-                                
-                                joker_card:add_sticker('eternal', true)
-                            end
-                            
-                            return true
-                        end
-                    }))
-                    
-                    if created_joker then
-                        card_eval_status_text(context.blueprint_card or card, 'extra', nil, nil, nil, {message = "Your not getting rid of me!", colour = G.C.BLUE})
-                    end
+                    card:juice_up(10, 20)
                     return true
-                end
+                end,
+                extra = {
+                    message = "SIX SEVEN!!! ",
+                    colour = G.C.WHITE
+                }
             }
         end
-        if context.pseudorandom_result  then
-            if context.result then
-                return {
-                    message = "ITS BECAUSE OF THE RESPAWN! HAIL SPAWNISM!"
-                }
-            end
+        if context.cardarea == G.jokers and context.joker_main  then
+            return {
+                Xmult = 6.7
+            }
         end
     end
 }

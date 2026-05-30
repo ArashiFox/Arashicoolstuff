@@ -41,38 +41,21 @@ SMODS.Joker{ --Poppy
     end,
     
     calculate = function(self, card, context)
-        if context.buying_card  then
+        if (context.end_of_round or context.reroll_shop or context.buying_card or
+            context.selling_card or context.ending_shop or context.starting_shop or 
+            context.ending_booster or context.skipping_booster or context.open_booster or
+            context.skip_blind or context.before or context.pre_discard or context.setting_blind or
+        context.using_consumeable)   then
             return {
                 func = function()
-                    card.ability.extra.bap = G.jokers and G.jokers.config.card_limit or 0
+                    G.E_MANAGER:add_event(Event({func = function()
+                        G.consumeables.config.card_limit = G.jokers and G.jokers.config.card_limit or 0
+                        return true
+                    end }))
+                    card_eval_status_text(context.blueprint_card or card, 'extra', nil, nil, nil, {message = "Woof.", colour = G.C.BLUE})
                     return true
                 end
             }
-        end
-        if context.end_of_round and context.game_over == false and context.main_eval  then
-            return {
-                func = function()
-                    card.ability.extra.bap = G.jokers and G.jokers.config.card_limit or 0
-                    return true
-                end
-            }
-        end
-    end,
-    
-    add_to_deck = function(self, card, from_debuff)
-        original_slots = G.consumeables.config.card_limit
-        G.E_MANAGER:add_event(Event({func = function()
-            G.consumeables.config.card_limit = card.ability.extra.bap
-            return true
-        end }))
-    end,
-    
-    remove_from_deck = function(self, card, from_debuff)
-        if original_slots then
-            G.E_MANAGER:add_event(Event({func = function()
-                G.consumeables.config.card_limit = original_slots
-                return true
-            end }))
         end
     end
 }

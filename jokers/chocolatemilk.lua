@@ -11,7 +11,7 @@ SMODS.Joker{ --Chocolate milk
         ['name'] = 'Chocolate milk',
         ['text'] = {
             [1] = '{X:red,C:white}X6{} Mult one round,',
-            [2] = 'then {X:red,C:white}X0.3{} Mult the next.',
+            [2] = 'then {X:red,C:white}X0.6{} Mult the next.',
             [3] = '{C:attention}Destroyed{} after second round'
         },
         ['unlock'] = {

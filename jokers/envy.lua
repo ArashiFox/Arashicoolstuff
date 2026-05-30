@@ -12,12 +12,13 @@ SMODS.Joker{ --Envy
         ['name'] = 'Envy',
         ['text'] = {
             [1] = 'Always spawns {C:legendary}Eternal{}',
-            [2] = 'When a card with an {C:dark_edition}Edition{}',
-            [3] = 'is played, remove it\'s {C:dark_edition}Edition{}',
-            [4] = 'and add its effect to this joker',
-            [5] = '(Currently {C:blue}+#1#{} Chips,',
-            [6] = '{C:red}+#2#{} Mult, and {X:red,C:white}X#3#{} Mult)',
-            [7] = 'Credits to {X:legendary,C:white}Ridry{} for idea'
+            [2] = 'When a card with {C:edition}Polychrome,',
+            [3] = 'Holographic, or Foil{}',
+            [4] = 'is played, remove it\'s {C:dark_edition}Edition{}',
+            [5] = 'and add its effect to this joker',
+            [6] = '(Currently {C:blue}+#1#{} Chips,',
+            [7] = '{C:red}+#2#{} Mult, and {X:red,C:white}X#3#{} Mult)',
+            [8] = 'Credits to {X:legendary,C:white}Ridry{} for idea'
         },
         ['unlock'] = {
             [1] = ''

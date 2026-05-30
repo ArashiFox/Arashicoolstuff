@@ -11,7 +11,7 @@ SMODS.Joker{ --Jussegutten
         ['text'] = {
             [1] = 'Gains {X:mult,C:white}X0.5{} Mult when a {C:attention}card{}',
             [2] = 'is {C:attention}bought, sold{} or {C:attention}used{}',
-            [3] = '{C:inactive}(Currently {X:mult,C:white}#1#{}{}{C:inactive}){}'
+            [3] = '{C:inactive}(Currently {X:mult,C:white}X#1#{}{}{C:inactive}){}'
         },
         ['unlock'] = {
             [1] = 'Unlocked by default.'
@@ -33,6 +33,7 @@ SMODS.Joker{ --Jussegutten
     unlocked = true,
     discovered = true,
     atlas = 'CustomJokers',
+    pools = { ["arashi_leg_pets"] = true },
     soul_pos = {
         x = 2,
         y = 3

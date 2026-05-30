@@ -33,6 +33,7 @@ SMODS.Joker{ --Bossan
     unlocked = true,
     discovered = true,
     atlas = 'CustomJokers',
+    pools = { ["arashi_leg_pets"] = true },
     soul_pos = {
         x = 4,
         y = 0
@@ -52,32 +53,18 @@ SMODS.Joker{ --Bossan
     end,
     
     calculate = function(self, card, context)
-        if context.end_of_round and context.game_over == false and context.main_eval  then
+        if (context.end_of_round or context.reroll_shop or context.buying_card or
+            context.selling_card or context.ending_shop or context.starting_shop or 
+            context.ending_booster or context.skipping_booster or context.open_booster or
+            context.skip_blind or context.before or context.pre_discard or context.setting_blind or
+        context.using_consumeable)   then
             return {
                 func = function()
-                    card.ability.extra.bap = (G.hand and G.hand.config.card_limit or 0)
+                    card_eval_status_text(context.blueprint_card or card, 'extra', nil, nil, nil, {message = "WOOF!", colour = G.C.BLUE})
+                    G.jokers.config.card_limit = (G.hand and G.hand.config.card_limit or 0)
                     return true
                 end
             }
-        end
-        if context.buying_card  then
-            return {
-                func = function()
-                    card.ability.extra.bap = (G.hand and G.hand.config.card_limit or 0)
-                    return true
-                end
-            }
-        end
-    end,
-    
-    add_to_deck = function(self, card, from_debuff)
-        card.ability.extra.original_joker_slots = G.jokers.config.card_limit
-        G.jokers.config.card_limit = card.ability.extra.bap
-    end,
-    
-    remove_from_deck = function(self, card, from_debuff)
-        if card.ability.extra.original_joker_slots then
-            G.jokers.config.card_limit = card.ability.extra.original_joker_slots
         end
     end
 }

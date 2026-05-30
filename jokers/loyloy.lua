@@ -31,6 +31,7 @@ SMODS.Joker{ --Loyloy
     unlocked = true,
     discovered = true,
     atlas = 'CustomJokers',
+    pools = { ["arashi_leg_pets"] = true },
     soul_pos = {
         x = 4,
         y = 3

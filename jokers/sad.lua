@@ -3,13 +3,13 @@ SMODS.Joker{ --Sad chocolate milk
     key = "sad",
     config = {
         extra = {
-            xmult0 = 0.3
+            xmult0 = 0.6
         }
     },
     loc_txt = {
         ['name'] = 'Sad chocolate milk',
         ['text'] = {
-            [1] = '{X:red,C:white}X0.3{} Mult'
+            [1] = '{X:red,C:white}X0.6{} Mult, is destroyed after one round'
         },
         ['unlock'] = {
             [1] = 'Unlocked by default.'
@@ -29,17 +29,8 @@ SMODS.Joker{ --Sad chocolate milk
     eternal_compat = true,
     perishable_compat = true,
     unlocked = true,
-    discovered = true,
+    discovered = false,
     atlas = 'CustomJokers',
-    pools = { ["arashi_food"] = true },
-    in_pool = function(self, args)
-        return (
-            not args 
-            or args.source ~= 'sho' 
-            or args.source == 'buf' or args.source == 'jud' or args.source == 'rif' or args.source == 'rta' or args.source == 'sou' or args.source == 'uta' or args.source == 'wra'
-        )
-        and true
-    end,
     
     set_ability = function(self, card, initial)
         card:set_eternal(true)
@@ -48,7 +39,7 @@ SMODS.Joker{ --Sad chocolate milk
     calculate = function(self, card, context)
         if context.cardarea == G.jokers and context.joker_main  then
             return {
-                Xmult = 0.3
+                Xmult = 0.6
             }
         end
         if context.end_of_round and context.game_over == false and context.main_eval  then

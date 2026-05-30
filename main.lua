@@ -82,6 +82,7 @@ if true then
     assert(SMODS.load_file("jokers/greed.lua"))()
     assert(SMODS.load_file("jokers/yapchatfilter.lua"))()
     assert(SMODS.load_file("jokers/msskeleton.lua"))()
+    assert(SMODS.load_file("jokers/tradeoffer.lua"))()
 end
 -- load the consumables
 if true then
@@ -89,6 +90,7 @@ if true then
     assert(SMODS.load_file("consumables/dogement.lua"))()
     assert(SMODS.load_file("consumables/gilbert.lua"))()
     assert(SMODS.load_file("consumables/oracle.lua"))()
+    assert(SMODS.load_file("consumables/catsoul.lua"))()
 end
 -- load the seals
 if true then
@@ -110,8 +112,16 @@ SMODS.ObjectType({
         ["j_selzer"] = true,
         ["j_arashi_chocolatemilk"] = true,
         ["j_arashi_emptybottle"] = true,
-        ["j_arashi_sad"] = true,
         ["j_arashi_waterbottle"] = true
+    },
+})
+
+SMODS.ObjectType({
+    key = "arashi_leg_pets",
+    cards = {
+        ["j_arashi_bossan"] = true,
+        ["j_arashi_jussegutten"] = true,
+        ["j_arashi_loyloy"] = true
     },
 })
 
@@ -130,7 +140,8 @@ SMODS.ObjectType({
         ["j_arashi_brainrot"] = true,
         ["j_arashi_greed"] = true,
         ["j_arashi_yapchatfilter"] = true,
-        ["j_arashi_msskeleton"] = true
+        ["j_arashi_msskeleton"] = true,
+        ["j_arashi_tradeoffer"] = true
     },
 })
 

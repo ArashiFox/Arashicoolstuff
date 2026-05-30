@@ -25,7 +25,7 @@ SMODS.Joker{ --Big Joker
         w = 71 * 1.3, 
         h = 95 * 1.3
     },
-    cost = 4,
+    cost = 9,
     rarity = 3,
     blueprint_compat = true,
     eternal_compat = true,

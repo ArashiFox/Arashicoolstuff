@@ -45,13 +45,17 @@ SMODS.Joker{ --Super gilb(200k iq)
     
     calculate = function(self, card, context)
         if context.cardarea == G.jokers and context.joker_main  then
-            for i = 1, math.min(1, G.consumeables.config.card_limit - #G.consumeables.cards) do
+            for i = 1, 1 do
                 G.E_MANAGER:add_event(Event({
                     trigger = 'after',
                     delay = 0.4,
                     func = function()
+                        if G.consumeables.config.card_limit > #G.consumeables.cards + G.GAME.consumeable_buffer then
+                            G.GAME.consumeable_buffer = G.GAME.consumeable_buffer + 1
+                        end
+                        
                         play_sound('timpani')
-                        SMODS.add_card({ set = 'Spectral', })                            
+                        SMODS.add_card({ set = 'Spectral', edition = 'e_negative', })                            
                         card:juice_up(0.3, 0.5)
                         return true
                     end
